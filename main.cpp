@@ -1,6 +1,8 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
+#include <fstream>
+
 
 #define PRINTABLE_MAX 126
 #define PRINTABLE_MIN 32
@@ -9,6 +11,8 @@ using namespace std;
 
 int main()
 {
+    fstream store;
+    store.open("passwords", fstream::app);
     int length = 0;
     srand(time(NULL));
     string password = "";
@@ -31,9 +35,8 @@ int main()
         }
     }
     cout << "Password generated: " << password << endl;
-
-
-
+    store << password << endl;
+    store.close();
     return 0;
 }
 
