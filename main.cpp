@@ -1,10 +1,39 @@
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
+
+#define PRINTABLE_MAX 126
+#define PRINTABLE_MIN 32
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    int length = 0;
+    srand(time(NULL));
+    string password = "";
+    unsigned char c;
+
+    cout << "Select length (0 - 128 characters)" << endl;
+    cin >> length;
+    if(length < 1 || length > 128) {
+        cerr << "Incorrect length supplied" << endl;
+        return 1;
+    }
+
+
+    for(int i = 0; i < length; i++) {
+        c = rand() % (PRINTABLE_MAX + 1);
+        if(c < PRINTABLE_MIN) {
+            i--;
+        } else {
+            password += c;
+        }
+    }
+    cout << "Password generated: " << password << endl;
+
+
+
     return 0;
 }
 
